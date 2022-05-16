@@ -1,0 +1,17 @@
+body {
+    display: flex;
+    justify-content: center;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    background: black;
+    padding: 25px;
+    height: 100%;
+    margin: 0;
+    align-items: center;
+}
+
+canvas {
+    background: #240015;
+    border: solid #55004e 1px;
+}
+
