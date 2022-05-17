@@ -1,5 +1,6 @@
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     font-family: 'Press Start 2P', cursive;
     color: white;
@@ -10,8 +11,30 @@ body {
     align-items: center;
 }
 
+button {
+    margin: 10px 10px 10px 0px;
+    padding: 7px;
+    background-color: #55004e;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+   outline: none;
+}
+
 canvas {
     background: #240015;
     border: solid #55004e 1px;
 }
 
+section {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    column-gap: 20px;
+    row-gap: 20px;
+}
+
+section div {
+    font-size: 10px;
+}

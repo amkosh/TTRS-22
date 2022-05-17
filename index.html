@@ -9,17 +9,22 @@
 
 <body>
     <header>
-        
-    </header>
-
-    <section>
         <div>
             <p>TTRS-22</p>
         </div>
-        <canvas id="info__frame" width="80" height="80"></canvas>
-        <canvas id="main__frame" width="200" height="400"></canvas>
+    </header>
+    
+    <section>
+        <div>
+            <canvas id="main__frame" width="200" height="400"></canvas>
+            <button id="pause" onclick="pause()">START</button>
+        </div>
         
-        <button onclick="pause()">Play</button>
+        <div>
+            <p>Next:</p>
+            <canvas id="info__frame" width="80" height="80"></canvas>
+        </div>
+        
     </section>
     <script src="js/script.js"></script>
 </body>

@@ -6,12 +6,16 @@ let grid = 20;
 let isPause = false;
 
 function pause() {
+    let button = document.getElementById('pause');
     isPause = !isPause;
     if(isPause){
         rAF = requestAnimationFrame(loop);
+        button.innerText = 'PAUSE';
     } else {
         cancelAnimationFrame(rAF);
+        button.innerText = 'RESUME';
     }
+    
 }
 
 //Последовательность фигур
@@ -352,13 +356,13 @@ function infoUpdate() {
     }
     ctxInfo.clearRect(0, 0, 80, 80);
     drawBG(ctxInfo);
-    console.log(tetrominoSequence[tetrominoSequence.length-1]);
-    const next = figures[tetrominoSequence[tetrominoSequence.length-1]];
+    let name = tetrominoSequence[tetrominoSequence.length-1];
+    const next = figures[name];
     for (let row = 0; row < next.length; row++) {
         for (let col = 0; col < next[row].length; col++) {
             if (next[row][col]) {
-                ctxInfo.fillStyle = colors[tetrominoSequence[tetrominoSequence.length-1]];
-                ctxInfo.fillRect((col) * grid, (row+1) * grid, grid-1, grid-1);
+                ctxInfo.fillStyle = colors[name];
+                ctxInfo.fillRect((name == 'I' ? col : col + 1) * grid, (row+1) * grid, grid-1, grid-1); //Написать тернарный оператор для палки
             }
         }
     }
