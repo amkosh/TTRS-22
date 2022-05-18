@@ -4,6 +4,7 @@ let infoFrame = document.getElementById("info__frame");
 let ctxInfo = infoFrame.getContext("2d");
 let grid = 20;
 let isPause = false;
+let score = 0;
 
 function pause() {
     let button = document.getElementById('pause');
@@ -79,7 +80,8 @@ const colors = {
     'S': '#008855',
     'Z': '#bb2200',
     'J': '#0022bb',
-    'L': '#bbbb00'
+    'L': '#bbbb00',
+    'E': '#fff'
 }
 
 //Счетчик кадров
@@ -194,13 +196,22 @@ function placeTetromino() {
     for (let row = playfield.length - 1; row >= 0; ) {
       // если ряд заполнен
       if (playfield[row].every(cell => !!cell)) {
-  
+
+          for(let i = 0; i < 10; i++){
+              playfield[row][i] = 'E';
+              drawField();
+          }
+          //Увеличиваем счетчик очков
+          score++;
         // очищаем его и опускаем всё вниз на одну клетку
+        eraseRow(row);
+        /*
         for (let r = row; r >= 0; r--) {
           for (let c = 0; c < playfield[r].length; c++) {
             playfield[r][c] = playfield[r-1][c];
           }
         }
+        */
       }
       else {
         // переходим к следующему ряду
@@ -240,16 +251,7 @@ function loop() {
     drawBG(ctx);
 
     // рисуем игровое поле с учётом заполненных фигур
-    for (let row = 0; row < 20; row++) {
-        for (let col = 0; col < 10; col++) {
-            if (playfield[row][col]) {
-                const name = playfield[row][col];
-                ctx.fillStyle = colors[name];
-                // рисуем всё на один пиксель меньше, чтобы получился эффект «в клетку»
-                ctx.fillRect(col * grid, row * grid, grid-1, grid-1);
-            }
-        }
-    }
+    drawField();
 
     // рисуем текущую фигуру
   if (tetromino) {
@@ -327,7 +329,29 @@ document.addEventListener('keydown', function(e) {
       tetromino.row = row;
     }
   });
-  
+
+function eraseRow(row){
+    
+    for (let r = row; r >= 0; r--) {
+        for (let c = 0; c < playfield[r].length; c++) {
+          playfield[r][c] = playfield[r-1][c];
+        }
+    }
+}
+
+function drawField(){
+    // рисуем игровое поле с учётом заполненных фигур
+    for (let row = 0; row < 20; row++) {
+        for (let col = 0; col < 10; col++) {
+            if (playfield[row][col]) {
+                const name = playfield[row][col];
+                ctx.fillStyle = colors[name];
+                // рисуем всё на один пиксель меньше, чтобы получился эффект «в клетку»
+                ctx.fillRect(col * grid, row * grid, grid-1, grid-1);
+            }
+        }
+    }
+}
 
 function drawBG(context) {
     for(let x = 0; x < mainFrame.width; x += 20){
@@ -366,6 +390,8 @@ function infoUpdate() {
             }
         }
     }
+    this.score = document.getElementById("score");
+    this.score.innerText = score;
 }
   // старт игры
  // rAF = requestAnimationFrame(loop);
